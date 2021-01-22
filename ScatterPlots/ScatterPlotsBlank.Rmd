@@ -1,0 +1,154 @@
+---
+title: "Scatter Plots"
+author: "your name here"
+date: "today's date"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This is the blank R Markdown file for the PeterPlots video "Scatter Plots | The R + ggplot2 Tutorial Part 5". You are encouraged to fill in this document as I walk through how to build scatter plots using ggplot2.
+
+This tutorial series is guided by Winston Chang's R Graphics Cookbook. Today's video on Scatter Plots follows the R Graphics Cookbook Chapter 5. The link to the chapter is in the description below.
+
+The purpose of scatter plots are to show the relationship between two continuous variables. Within scatter plots, each individual observation, or data point, is represented by a point. Lines are often added to scatter plots, either to show averages or to show predicted values based on a particular statistical model, like a simple linear regression.
+
+Before we begin the tutorial, we'll need to load in the tidyverse and gcookbook libraries. We will also need to set our theme to theme_bw().
+
+```{r}
+library(tidyverse)
+library(gcookbook)
+
+theme_set(theme_bw())
+```
+
+# Basic Scatter Plot
+
+We will map one continuous variable to x and another continuous variable to y using the geom_point() layer.
+
+```{r}
+
+```
+
+As we saw in the previous video, you can change the shape and size of points using the shape and size arguments.
+
+```{r}
+
+```
+
+# Grouping points with shapes and colors
+
+To group points together using a shape or color, you will want to map a grouping variable (must be discrete) to either shape or color.
+
+Let's look at three variables from heightweight.
+
+```{r}
+
+```
+
+We will make sex the grouping variable.
+
+```{r}
+
+```
+
+As always, we can change the shape type and color. This time we will manually set the shapes using scale_shape_manual. Colors can also be set manually or be set with with a brewer palette.
+
+```{r}
+
+```
+
+# Mapping continuous variables to color and size
+
+Mapping a third continuous variable to the color or size of your points will essentially add a color or shape gradient to your points. I don't recommend mapping a third continuous variable to shape, as it gets very difficult very soon to be able to interpret differences
+
+So I'm just going to show you how to map a continuous variable to color. The heighweight has a variable weightLb
+that we can use as a third continuous variable.
+
+```{r}
+
+```
+
+In my personal opinion, I don't think mapping a third continuous variable to a scatter plot is a good idea. So I'm not going to show you how to change the color or anything else.
+
+# Overplotting
+
+Overplotting is when too many points overlap and block each other from view, and it happens mainly with data sets that have tens of thousands of rows, like diamonds.
+
+```{r}
+
+```
+
+Each row in the diamonds data set represents one diamond and information about its attributes.
+
+```{r}
+
+```
+
+There are four ways to deal with overplotting.
+
+1. Making the points semitransparent:
+
+```{r}
+
+```
+
+But there are still large areas of just black, even with 99% transparency.
+
+2. Binning with rectangles or hexagons:
+
+This means we create rectangles in the plotting space, and however many points fall into each rectangle corresponds to a color gradient. Observe...
+
+```{r}
+
+```
+
+You can also bin with hexagons. Same concept, although the shape is now hexagons.
+
+```{r}
+
+```
+
+When manually specifying the range, if you have bins that fall outside of that range, they will appear as grey rather than the color at the high end of the range.
+
+3. Jittering the points
+
+Overplotting also occurs with discrete variables as well. In this instance, we will want to "jitter" the points like this:
+
+```{r}
+
+```
+
+4. Using box plots
+
+We can also use geom_boxplot to show a box plot distribution of the points in the plot. You will also need to map a variable to group:
+
+```{r}
+
+```
+
+I will explain box plots more when I get to the summary plots video.
+
+Chang's book goes on to describe several ways you can add model lines and mode coefficents as well as labels to scatter plots. I'm not going to teach you anything to deal with models, nor will I show you how to label points on a scatter plot.
+
+I will get to labeling when I produce my Annotations video. If you want to learn about adding model lines to a scatter plot, by all means go to the Chang's book to learn about that. Link in the description below. 
+
+Ok that's all for this video
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
