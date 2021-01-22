@@ -1,0 +1,169 @@
+---
+title: "Line Plots"
+author: "your name here"
+date: "today's date"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This is the blank R Markdown file for the PeterPlots video "Line Plots | The R + ggplot2 Tutorial Part 4". You are encouraged to fill in this document as I walk through how to build line plots using ggplot2.
+
+This tutorial series is guided by Winston Chang's R Graphics Cookbook. Today's video on Line Plots follows the R Graphics Cookbook Chapter 4. The link to the chapter is in the description below.
+
+The purpose of line plots is to show the change of one continuous variable (mapped to the y-axis) in relation to another continuous variable (mapped to the x-axis). Most often, a time varibale is mapped to the x-axis, but other times, treatment amounts in experiements may be mapped.
+
+Discrete variables can be mapped to the x-axis in line plots, but only if those discrete variables are ordered.
+
+Before we begin the tutorial, we'll need to load in the tidyverse and gcookbook libraries. We will also need to set our theme to theme_bw().
+
+```{r}
+library(tidyverse)
+library(gcookbook)
+
+theme_set(theme_bw())
+```
+
+
+# Basic Line Plots
+
+To make a basic line plot, we will use the geom_line() layer.
+
+```{r}
+
+```
+
+In the BOD data set, the variable Time does not have a value at 6. If we changed Time to a factor, that fact would be more apparent.
+
+```{r}
+
+```
+
+For line plots, it's good for the y-axis to begin at 0. We can set the limits wiht ylim().
+
+```{r}
+
+```
+
+If you want to change the appearance of the line, you can change the linetype, the color, and the line's thickness via size.
+
+```{r}
+
+```
+
+# Adding points to a line
+
+To add points to your line plot, add a geom_point() layer. 
+
+```{r}
+
+```
+
+If you want to change the appearance of these points, you can set the size, shape, color, and fill within geom_point().There is a list of shapes that correspond to each number that is set to the shape argument.
+
+```{r}
+
+```
+
+Here is a link to an image that shows which point shape corresponds to which number for the shape argument:
+http://www.sthda.com/sthda/RDoc/images/points-symbols.png
+
+It comes courtesy of sthda.com.
+
+# Line plots with multiple lines
+
+To make a line plot with multiple lines, you'll need to map a discrete variable to either color or linetype like so:
+
+```{r}
+
+```
+
+Sometimes we might want to consider dose as a discrete variable rather than a continuous. If we were to plot tg with dose being discrete, we must also specify the group aesthetic.
+
+```{r}
+
+```
+
+If we don't include the group argument, then R won't know which lines it is supposed to connect.
+
+```{r}
+
+```
+
+You will get this weird jagged singular line. So if you are trying to display multiple lines on a line plot, you must always specify a group (which can be done with color or some other argument). However, if you do end up with a jagged line, specifying group will likely fix it.
+
+You can also map variables to different attributes of the points, such as the shape and the color fill.
+
+```{r}
+
+```
+
+Because you mapped the second variable to shape and added a geom_point() layer, R knew how to connect the lines properly. The same thing would happen if you mapped the second variable to fill.
+
+```{r}
+tg %>% 
+  ggplot(aes(x = dose, y = length, fill = supp)) +
+  geom_line() +
+  geom_point(size = 3, shape = 22)
+```
+
+Notice how the last points on each line overlap. To fix them, we will dodge the points by adjusting their (the points' and lines') positions to the left and right using position = position_dodge().
+
+```{r}
+
+```
+
+If you want to change the colors of your lines, you can either use scale_color_brewer or scale_color_manual. Notice that color has taken the place of fill in the scale_()_() function. In the bar plots video, we used scale_fill_brewer and scale_fill_manual.
+
+```{r}
+
+```
+
+When setting colors manually, the values you map will be mapped to the values in alphabetical order. So since OJ comes before VC, green goes to OJ and orange goes to VC.
+
+You can also manually set which values get which colors.
+
+```{r}
+
+```
+
+You'll have more information about colors in the future as it will get its own video.
+
+# Line plots with a shaded area
+
+To shade an area under a line in a line plot, use geom_area(). We will be using the sunspot data set to accomplish this task, althought this will require us makign our onw data frame before we make the plot.
+
+```{r}
+
+```
+
+The default fill is dark grey with no outline. We can change both by setting a color in fill and changing the transparency with alpha.
+
+```{r}
+
+```
+
+
+# Stacked area plots
+
+Stacked area plots have basically the same concept as stacked bar plots. We'll use geom_area() and map a factor to fill.
+
+```{r}
+
+```
+
+We can change the colors to a range of blues, add thin lines between the areas, and change the  transparency like this:
+
+```{r}
+
+```
+
+To make a proportional stacked area plot, just like with the bar plots, we set position = "fill" within geom_area(). We change the y-axis labels using labels = scales::percent within scale_y_continuous
+
+```{r}
+
+```
+
+
