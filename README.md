@@ -3,7 +3,7 @@ This repository contains all of the code and some data used in the PeterPlots R 
 
 As a reminder, this tutorial series is based off of Winston Chang's *R Graphics Cookbook* [link to book](https://r-graphics.org/). 
 
-| Title | Video Link | Associated Cookbook Chapter |
+| Description | Video Link | Associated Cookbook Chapter |
 | ----------- | ----------- | ----------- |
 | Introduction | [Why R + ggplot2 are the Best Dataviz Tools & Intro to R](https://www.youtube.com/watch?v=C_HgSC4GQQw) | N/A |
 | Tidying Data | [How to Tidy Data to Prepare it for Visualization](https://www.youtube.com/watch?v=JrUfk8NaNvY) | N/A |
