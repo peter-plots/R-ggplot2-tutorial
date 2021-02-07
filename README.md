@@ -15,5 +15,4 @@ As a reminder, this tutorial series is based off of Winston Chang's *R Graphics 
 | Axes | Link | [Chapter 8](https://r-graphics.org/CHAPTER-AXES.html) |
 | Themes | Link | [Chapter 9](https://r-graphics.org/CHAPTER-APPEARANCE.html) |
 | Legends | Link | [Chapter 10](https://r-graphics.org/CHAPTER-LEGEND.html) |
-| Facets | Link | [Chapter 11](https://r-graphics.org/chapter-facet)|
 | Colors | Link | [Chapter 12](https://r-graphics.org/CHAPTER-COLORS.html)|
