@@ -10,7 +10,7 @@ As a reminder, this tutorial series is based off of Winston Chang's *R Graphics 
 | Bar Plots | [How to Make Bar Plots](https://www.youtube.com/watch?v=UE6MQjvF8xc) | [Chapter 3](https://r-graphics.org/chapter-bar-graph) |
 | Line Plots | [How to Make Line Plots](https://www.youtube.com/watch?v=2k1WYDpwQYY&list=PLV46KgdpxbmQSiAkvfkPYdJQPXZhd-deB&index=4) | [Chapter 4](https://r-graphics.org/CHAPTER-LINE-GRAPH.html) |
 | Scatter Plots | [How to Make Scatter Plots](https://youtu.be/Sd6alwuQViM)  | [Chapter 5](https://r-graphics.org/CHAPTER-SCATTER.html) |
-| Summary Plots | Link | [Chapter 6](https://r-graphics.org/CHAPTER-DISTRIBUTION.html) |
+| Summary Plots | [How to Make Summary Plots](https://www.youtube.com/watch?v=RF1BTW8oe1s) | [Chapter 6](https://r-graphics.org/CHAPTER-DISTRIBUTION.html) |
 | Annotations | Link | [Chapter 7](https://r-graphics.org/CHAPTER-ANNOTATE.html) |
 | Axes | Link | [Chapter 8](https://r-graphics.org/CHAPTER-AXES.html) |
 | Themes | Link | [Chapter 9](https://r-graphics.org/CHAPTER-APPEARANCE.html) |
