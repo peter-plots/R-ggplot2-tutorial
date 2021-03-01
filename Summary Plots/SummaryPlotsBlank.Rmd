@@ -1,0 +1,257 @@
+---
+title: "Summary Plots"
+author: "your name here"
+date: "today's date"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This tutorial series is guided by Winston Chang's R Graphics Cookbook. Today's video on Summary Plots follows the R Graphics Cookbook Chapter 6. The link to the chapter is in the description below.
+
+Summarized distribution plots are one of the most powerful types of plots you will learn how to make. There are several kinds of distribution plots that you will learn today.
+
+Before we begin the tutorial, we'll need to load in the tidyverse and gcookbook libraries. We will also need to set our theme to theme_bw().
+
+```{r}
+library(tidyverse)
+library(gcookbook)
+
+theme_set(theme_bw())
+```
+
+# Histograms 
+
+Use `geom_histogram()` to plot a histogram and map a continuous variable to `x`.
+
+```{r}
+
+```
+
+
+In a histogram, you map a single variable to  the x-axis. There are "bins" along the x-axis that divide your up your data. You might notice in the consol that bins = 30. What that means that the data is divided into 30 bins.
+
+The number of data points that fall into each bin gets plotted as the count on the y-axis.
+
+You can change binwidth, which changes how many x-axis-units will be included in each bin. So if binwidth = 5, then each bin will be 5 x-axis-units wide.
+
+You can also change fill and color (outline) within geom_histogram().
+
+```{r}
+
+```
+
+You can also plot multiple histograms on the same plot
+
+This will make simulatenous histograms that are based on a grouping variable. The data must all be in the same data frame, and the grouping variable must be discrete. We will also introduce the facet here.
+
+```{r}
+
+```
+
+
+Let's look at the structure of `birthwt$smoke`.
+
+```{r}
+
+```
+
+The smoke variable is only 0 or 1, and the labels on the facets are labeled as such. This is not helpful for communicating information.
+
+To change the labels, we can change the values in the variable.
+
+Let's first make a copy of birthwt and change the names of the levels in the smoke factor.
+
+```{r}
+
+```
+
+Now we can make a faceted histogram with the correct labels
+
+```{r}
+
+```
+
+With faceting, the y-axes have the same scale. We can change that by setting scale = "free"
+
+```{r}
+
+```
+
+
+If you don't want to facet, you can also map the grouping variable to fill, making sure that the bars are not stacked and that you lower the transparency of the histograms. 
+
+You will `position = "identity"` so that ggplot doesn't stack the histograms, which would be a meaningless plot.
+
+```{r}
+
+```
+
+# Density Curves
+
+Similar to histograms, `geom_density` creates a kernal density curve which shows an estimated distribution of the population data based on the sample data.
+
+You can map a single continuous variable to x.
+
+```{r}
+
+```
+
+  
+The kernel bandwidth determines the amount of smoothing of the curve; larger bandwidth means more smoothing. The `adjust` argument sets the bandwidth; 1 is the default.
+
+We're going to try out a couple of bandwitdths to demonstrate how it changes.
+
+```{r}
+
+```
+
+We can also fill in the density curve, change the transparency, and give the curve an outline. Expanding the x limits allows us to see the tails of the curve.
+
+```{r}
+
+```
+
+For making density curves from grouped data,  we can map another (discrete) variable to either fill or color. When using birthwt, the smoke variable is stored as a number, so we must change it.
+
+```{r}
+
+```
+
+Here we map smoke to fill while changing transparency.
+
+```{r}
+
+```
+
+Again, data must be all in the same data frame.
+
+# Basic Box Plots
+
+A box plot, or box-and-whiskers plot, is a  very basic display of a distribution of data. The box represents the 25th-75th percentiles, also known as the interquartile range, or IQR.
+
+The line inside the box represents the median of the data, or 50th percentile. The lines extending from either side of the boxes (whiskers), represent the data that fall within 1.5*IQR. And data that that fall outside the whiskers are represented as points and are considered outliers.
+
+To make a box plot in ggplot, map a continuous variable to `y` and a discrete variable to `x`. Use the `geom_boxplot` layer.
+
+```{r}
+
+```
+
+To change the width of the boxes, set the `width` argument within `geom_boxplot()`
+
+```{r}
+
+```
+
+To change the shape and size of the outlier  points, set `outlier.size` and `outlier.shape` in `geom_boxplot()`.
+
+```{r}
+
+```
+
+# Violin Plots
+
+Violin plots help with comparing density estimates between different groups. This comparison is ideal because with regular density plots, the overlapping lines can interfere with each other and make it difficult to compare.
+
+Violin plots are kernel density estiatmes, just mirrored so that it forms a symmetrical violin-like shape.
+
+```{r}
+
+```
+
+You can also layer on thin box plots to help show more information about the distribution. 
+
+```{r}
+
+```
+
+Notice how I layered the violin plot, then the box plot, then the white dot representing the median (using `stat_summary()`). This order is of layering is necessary in order to replicate this plot.
+
+The default range (flat end to flat end) incorporates the minimum and maximum data values. If you want to keep the tails (which extend beyond the max/min values), you can do so just like this:
+
+```{r}
+
+```
+
+The default area of both violin plots is the same. If you want to scale the areas proportionally to the number of observations in each group (and thus making the areas unequal), you can add `scale = count`. 
+
+Our heighweight data frame contains fewer females then males, so the female violin will become slightly thinner than previous.
+
+```{r}
+
+```
+
+To adjust the smoothing of the violins, use the `adjust` argument in `geom_violin()`.
+
+```{r}
+# more smoothing
+heightweight %>%
+  ggplot(aes(x = sex, y = heightIn)) +
+  geom_violin(adjust = 2)
+```
+
+```{r}
+
+```
+
+# Dot Plots
+
+The Wilkinson Dot Plot shows each data point. For example, we will plot the `countries` data set, filtering it to just include the year 2009 and countries that have health expenditures of over $2000 per person. We will plot infant mortality on the x-axis.
+
+Each dot in the following dot plot will plot each data point inside a bin defined by the binwidth. If multiple dots appear inside a bin, they will be stacked on top of each other.
+
+```{r}
+
+```
+
+Named after Leland Wilkinson, who first coined "grammar of graphics", the dot plot places bins on the x-axis depending on the size of the data, and the width of each bin corresponds to the width of each dot. Like with histograms, the default bin size is 1/30 the range of the data. This can be changed with binwidth.
+
+
+```{r}
+
+```
+
+The y-axis isn't particularly helpful. Since each dot represents the location of that particular data point, the stacking of the dots represents the count of the data points at that x-axis position. 
+
+We can remove the y-axis like so:
+
+```{r}
+
+```
+
+Now, the default for dotdensity binning places each stack above the center of the set of data points to which it corresponds.
+
+To change this so that there is fixed, even spacing (like a histogram), use `method = "histodot"`.
+
+```{r}
+
+```
+
+You can also stack the dots such that they are centered in two different ways.
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+If you want to make multiple dot plots from grouped data, you will need to map a grouping discrete variable to the x-axis and a continuous variable to the y-axis. This will stack the dots along the y-axis.
+
+```{r}
+
+```
+
+This is essentially a dot plot version of a violin plot.
+
+You can also overlay the dot plots on top of box plots. In order to make things easy to see, we will make the dots hollow and make the boxplots not show outliers.
+
+```{r}
+
+```
+
+
